@@ -4,7 +4,10 @@ import { Button, Container, FloatingLabel, Form } from 'react-bootstrap';
 import { useHistory, useLocation } from 'react-router';
 import { commentOperation, commentSelectors } from '../../Redux/coments';
 import { useDispatch, useSelector } from 'react-redux';
+import { productsSelectors } from '../../Redux/products';
 import CommentItem from '../CommentItem/CommentItem';
+import axios from 'axios';
+import { productOperations } from '../../Redux/products';
 
 function DetailPage({
   id,
@@ -20,29 +23,16 @@ function DetailPage({
   const history = useHistory();
   const [informer, setInformer] = useState('');
   const [comment, setComment] = useState('');
-  const dispatch = useDispatch();
-  const allComments = useSelector(commentSelectors.getAllComments);
-  const [thisPageComments, setThisPageComments] = useState([]);
+
   const onGoBack = () => history.push(`${location?.state?.from ?? '/'}`);
+  // * I need fetch product by id
+
   function onSubmit(e) {
     e.preventDefault();
-    // console.log(informer, comment);
+    console.log(informer, comment);
     setInformer('');
     setComment('');
   }
-  // console.log(thisPageComments);
-  useEffect(() => {
-    if (thisPageComments.length === comments.length) return;
-    if (Object.keys(allComments).length !== 0) {
-      setThisPageComments(
-        comments.map(id => {
-          return allComments[id];
-        }),
-      );
-    }
-    if (thisPageComments.length === comments.length) return;
-    dispatch(commentOperation.fetchCommentsById(comments));
-  }, [allComments, comments, dispatch, thisPageComments]);
 
   return (
     <Container key={id} className="detail-page">
@@ -103,8 +93,8 @@ function DetailPage({
       </Form>
       <h3 className="details-page__comments-title">Comments</h3>
       <ul className="details-page__comments">
-        {thisPageComments[0] &&
-          thisPageComments.map(comment => (
+        {comments[0] &&
+          comments.map(comment => (
             <CommentItem key={comment.id} productCommitId={id} {...comment} />
           ))}
       </ul>

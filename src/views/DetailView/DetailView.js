@@ -1,28 +1,23 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import DetailPage from '../../Components/DetailPage/DetailPage';
+import { productsSelectors } from '../../Redux/products';
+import { productOperations } from '../../Redux/products';
 
 function DetailView() {
   const { productId } = useParams();
-  const [ProductInfo, setProductInfo] = useState(null);
+  const dispatch = useDispatch();
+  const productsArray = useSelector(productsSelectors.getProductList);
+  console.log('productsArray  DetailView', productsArray[productId]);
   useEffect(() => {
-    (async () => {
-      try {
-        const result = await axios
-          .get(`/products/${productId}`)
-          .then(r => setProductInfo(r.data));
-        return result.data;
-      } catch (error) {
-        return `${error.message}-- we can not get this product please reload this page and try again`;
-      }
-    })();
-    return () => {
-      setProductInfo(null);
-    };
-  }, [productId]);
+    dispatch(productOperations.fetchProductById(productId));
+  }, [productId, dispatch]);
 
-  return <div>{ProductInfo && <DetailPage {...ProductInfo} />}</div>;
+  return (
+    <div>
+      {productsArray[productId] && <DetailPage {...productsArray[productId]} />}
+    </div>
+  );
 }
 export default DetailView;

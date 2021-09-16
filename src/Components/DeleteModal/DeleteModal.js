@@ -19,8 +19,8 @@ function DeleteModal({ showModal }) {
     if (pathname.includes('/info/')) {
       dispatch(
         commentOperation.deleteComment({
-          id: delElement.id,
-          productCommitId: delElement.productCommitId,
+          commentId: delElement.id,
+          productCommentId: delElement.productCommitId,
         }),
       );
       return;

@@ -7,14 +7,27 @@ export const fetchProducts = createAsyncThunk(
   [actions.fetchProducts],
   async (_, { rejectWithValue }) => {
     try {
-      const result = await axios.get('/products');
+      const result = await axios.get('/products?_embed=comments');
+
+      console.log('result', result);
       return result.data;
     } catch (error) {
       return rejectWithValue(`${error.message}`);
     }
   },
 );
+export const fetchProductById = createAsyncThunk(
+  ['products/byId'],
+  async productId => {
+    try {
+      const result = await axios.get(`/products/${productId}?_embed=comments`);
 
+      return result.data;
+    } catch (error) {
+      return `${error.message}-- we can not get this product please reload this page and try again`;
+    }
+  },
+);
 export const addNewProduct = createAsyncThunk(
   [actions.addProduct],
   async (data, { rejectWithValue }) => {
@@ -35,7 +48,6 @@ export const deleteProduct = createAsyncThunk(
   async (id, { rejectWithValue }) => {
     try {
       const result = await axios.delete(`/products/${id}`);
-      console.log(result);
       if (result.status === 200) return id;
     } catch (error) {
       return rejectWithValue(

@@ -7,9 +7,9 @@ import { productOperations } from '../../Redux/products';
 import { useDispatch } from 'react-redux';
 
 function ProductList() {
-  const productsList = useSelector(productsSelectors.getProductsWithFilter);
+  const productsArray = useSelector(productsSelectors.getProductsWithFilter);
   const dispatch = useDispatch();
-  console.log(productsList);
+  const productsList = Object.values(productsArray);
 
   useEffect(() => {
     dispatch(productOperations.fetchProducts());

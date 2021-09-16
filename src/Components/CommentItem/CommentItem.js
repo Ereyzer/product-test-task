@@ -4,15 +4,21 @@ import { Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { areYouSureActionOpen } from '../../Redux/helpers/helpers-actions';
 
-function CommentItem({ name, id, comment, productCommitId }) {
+function CommentItem({ name, id, description, productCommitId }) {
   const dispatch = useDispatch();
   const handleClick = e => {
     dispatch(areYouSureActionOpen({ id, name, productCommitId }));
   };
+  console.log('{ name, id, description, productCommitId }', {
+    name,
+    id,
+    description,
+    productCommitId,
+  });
   return (
     <li key={id}>
       <h4>{name}</h4>
-      <p>{comment}</p>
+      <p>{description}</p>
       <Button variant="secondary" onClick={handleClick}>
         delete
       </Button>
@@ -20,14 +26,10 @@ function CommentItem({ name, id, comment, productCommitId }) {
   );
 }
 
-CommentItem.defaultProps = {
-  name: 'Anonym',
-};
-
 CommentItem.propTypes = {
-  name: PropTypes.string,
+  name: PropTypes.string.isRequired,
   id: PropTypes.number.isRequired,
-  comment: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
 };
 
 export default CommentItem;

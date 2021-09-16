@@ -1,11 +1,12 @@
 const initialState = {
   products: {
-    items: [],
+    items: {},
 
     filter: '',
   },
   comments: {
-    items: {},
+    items: [],
+    changeComments: false,
   },
   helpers: {
     areYouSureModal: false,
