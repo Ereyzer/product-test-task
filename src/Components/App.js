@@ -24,8 +24,10 @@ const DetailView = React.lazy(() =>
 const ListView = React.lazy(() => import('../Views/Listview/ListView.js'));
 
 function App() {
+  //* opn modal for add new product
   const [isOpenModal, setIsOpenModal] = useState(false);
 
+  //* opened modal and ask delete or no
   const isOpenASkModalOrNo = useSelector(isOpenAskModal);
   console.log(isOpenASkModalOrNo);
 
@@ -56,7 +58,7 @@ function App() {
         </Switch>
       </Suspense>
       <AddProductModal setShow={setIsOpenModal} show={isOpenModal} />
-      <DeleteModal showModal={isOpenASkModalOrNo} />
+      {isOpenASkModalOrNo && <DeleteModal showModal={isOpenASkModalOrNo} />}
       <ToastContainer
         position="top-right"
         autoClose={5000}

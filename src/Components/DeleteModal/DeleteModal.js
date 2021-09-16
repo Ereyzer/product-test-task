@@ -4,19 +4,28 @@ import { createPortal } from 'react-dom';
 import { Modal, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { areYouSureActionClose } from '../../Redux/helpers/helpers-actions';
-import {
-  deleteProductId,
-  deleteProductName,
-} from '../../Redux/helpers/helpers-selectors';
+import { getDelElement } from '../../Redux/helpers/helpers-selectors';
 import { productOperations } from '../../Redux/products';
+import { useLocation, useParams } from 'react-router';
+import { commentOperation } from '../../Redux/coments';
 
 function DeleteModal({ showModal }) {
-  console.log(deleteProductName);
-  const productName = useSelector(deleteProductName);
-  const productId = useSelector(deleteProductId);
+  const { pathname } = useLocation();
+
+  const delElement = useSelector(getDelElement);
+  console.log('delElement', delElement);
   const dispatch = useDispatch();
   function onDelete() {
-    dispatch(productOperations.deleteProduct(productId));
+    if (pathname.includes('/info/')) {
+      dispatch(
+        commentOperation.deleteComment({
+          id: delElement.id,
+          productCommitId: delElement.productCommitId,
+        }),
+      );
+      return;
+    }
+    dispatch(productOperations.deleteProduct(delElement.id));
     dispatch(areYouSureActionClose());
   }
   return createPortal(
@@ -24,7 +33,10 @@ function DeleteModal({ showModal }) {
       <Modal.Header closeButton>
         <Modal.Title>Are you sure</Modal.Title>
       </Modal.Header>
-      <Modal.Body>Do you want delete {productName}? </Modal.Body>
+      <Modal.Body>
+        Do you want delete {delElement.name}
+        {delElement.productCommitId && '`s commit'}?{' '}
+      </Modal.Body>
       <Modal.Footer>
         <Button
           variant="secondary"

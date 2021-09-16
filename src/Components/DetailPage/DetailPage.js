@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
+import React, { Component, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Button, Container, FloatingLabel, Form } from 'react-bootstrap';
 import { useHistory, useLocation } from 'react-router';
+import { commentOperation, commentSelectors } from '../../Redux/coments';
+import { useDispatch, useSelector } from 'react-redux';
+import CommentItem from '../CommentItem/CommentItem';
 
 function DetailPage({
   id,
@@ -17,14 +20,30 @@ function DetailPage({
   const history = useHistory();
   const [informer, setInformer] = useState('');
   const [comment, setComment] = useState('');
-
+  const dispatch = useDispatch();
+  const allComments = useSelector(commentSelectors.getAllComments);
+  const [thisPageComments, setThisPageComments] = useState([]);
   const onGoBack = () => history.push(`${location?.state?.from ?? '/'}`);
   function onSubmit(e) {
     e.preventDefault();
-    console.log(informer, comment);
+    // console.log(informer, comment);
     setInformer('');
     setComment('');
   }
+  // console.log(thisPageComments);
+  useEffect(() => {
+    if (thisPageComments.length === comments.length) return;
+    if (Object.keys(allComments).length !== 0) {
+      setThisPageComments(
+        comments.map(id => {
+          return allComments[id];
+        }),
+      );
+    }
+    if (thisPageComments.length === comments.length) return;
+    dispatch(commentOperation.fetchCommentsById(comments));
+  }, [allComments, comments, dispatch, thisPageComments]);
+
   return (
     <Container key={id} className="detail-page">
       <Button
@@ -84,10 +103,10 @@ function DetailPage({
       </Form>
       <h3 className="details-page__comments-title">Comments</h3>
       <ul className="details-page__comments">
-        {comments[0] &&
-          comments.map(comment => {
-            return <li key={comment}></li>;
-          })}
+        {thisPageComments[0] &&
+          thisPageComments.map(comment => (
+            <CommentItem key={comment.id} productCommitId={id} {...comment} />
+          ))}
       </ul>
     </Container>
   );

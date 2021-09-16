@@ -8,13 +8,13 @@ const areYouSureModal = createReducer(initialState.helpers.areYouSureModal, {
   [areYouSureActionClose]: () => false,
 });
 
-const deleteProduct = createReducer(initialState.helpers.deleteProduct, {
+const delElement = createReducer(initialState.helpers.delElement, {
   [areYouSureActionOpen]: (_, { payload }) => payload,
-  [areYouSureActionClose]: () => initialState.helpers.deleteProduct,
+  [areYouSureActionClose]: () => initialState.helpers.delElement,
 });
 
 const helpersReducer = combineReducers({
   areYouSureModal,
-  deleteProduct,
+  delElement,
 });
 export default helpersReducer;

@@ -1,15 +1,15 @@
 const initialState = {
   products: {
     items: [],
-    Comments: [],
+
     filter: '',
+  },
+  comments: {
+    items: {},
   },
   helpers: {
     areYouSureModal: false,
-    deleteProduct: {
-      name: null,
-      id: null,
-    },
+    delElement: null,
   },
   Comment: {
     id: 3,

@@ -17,8 +17,11 @@ function Header({ addButtonClick }) {
   };
 
   useEffect(() => {
+    console.log('location-navigation', location);
     if (location.pathname !== '/') {
       setIsList(false);
+    } else {
+      setIsList(true);
     }
     if (value.trim() === '') return;
     dispatch(productActions.filterAction(value.trim()));
