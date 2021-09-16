@@ -1,0 +1,33 @@
+{
+  "products": [
+    {
+      "id": 3,
+      "imageUrl": "https://media.istockphoto.com/photos/pineapple-picture-id499093438?s=612x612",
+      "name": "pineapple",
+      "count": 50,
+      "size": {
+        "width": 250,
+        "height": 320
+      },
+      "weight": 550,
+      "description": "some about this product",
+      "comments": [
+        5,
+        6
+      ]
+    },
+    {
+      "name": "cucumber",
+      "size": {
+        "width": 40,
+        "height": 40
+      },
+      "imageUrl": "https://cdn.pixabay.com/photo/2015/07/17/13/44/cucumbers-849269_960_720.jpg",
+      "count": 2000,
+      "weight": 2000,
+      "description": "Delicious",
+      "id": 5
+    }
+  ],
+  "Comments": []
+}

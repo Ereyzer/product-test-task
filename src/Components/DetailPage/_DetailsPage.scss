@@ -1,0 +1,26 @@
+.details-page {
+  padding: 30px;
+  &__go-back {
+    margin-top: 20px;
+  }
+  &__general-info {
+    display: flex;
+    // align-content: space-between;
+    margin-top: 20px;
+  }
+  &__textInfo {
+    margin-left: auto;
+  }
+  &__size {
+    margin-top: 20px;
+  }
+  &__comments {
+    margin-top: 20px;
+    &-title {
+      margin-top: 20px;
+    }
+  }
+  &__add-comment-button {
+    margin-top: 20px;
+  }
+}
