@@ -1,6 +1,6 @@
 import React, { Suspense, useState } from 'react';
 import { Switch, Redirect, Route } from 'react-router-dom';
-import './App.scss';
+import './App.css';
 import { ToastContainer } from 'react-toastify';
 import DeleteModal from './DeleteModal/DeleteModal';
 import 'react-toastify/dist/ReactToastify.css';
