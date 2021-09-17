@@ -39,11 +39,11 @@ function EditProductModal({ show, setShow }) {
     e.preventDefault();
     if (
       name.trim() === '' ||
-      width.trim() === '' ||
-      height.trim() === '' ||
+      width === '' ||
+      height === '' ||
       imageUrl.trim() === '' ||
-      count.trim() === '' ||
-      weight.trim() === '' ||
+      count === '' ||
+      weight === '' ||
       description.trim() === ''
     ) {
       toast.warn('please enter all field');
