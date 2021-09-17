@@ -4,6 +4,7 @@ import { Form, Modal, FloatingLabel } from 'react-bootstrap';
 import { createPortal } from 'react-dom';
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
+import { numberValidation } from '../../helpers/numberValidation';
 import { addNewProduct } from '../../Redux/products/products.operation';
 
 function AddProductModal({ show, setShow }) {
@@ -33,10 +34,10 @@ function AddProductModal({ show, setShow }) {
     dispatch(
       addNewProduct({
         name,
-        size: { width: Number(width), height: Number(height) },
+        size: { width, height },
         imageUrl,
-        count: Number(count),
-        weight: Number(count),
+        count,
+        weight,
         description,
       }),
     );
@@ -95,7 +96,7 @@ function AddProductModal({ show, setShow }) {
           <Form.Group className="mb-3" controlId="formBasicCount">
             <Form.Label>Count</Form.Label>
             <Form.Control
-              onChange={e => setCount(e.target.value)}
+              onChange={e => setCount(numberValidation(e.target.value))}
               value={count}
               type="num"
               placeholder="Count"
@@ -104,7 +105,7 @@ function AddProductModal({ show, setShow }) {
           <Form.Group className="mb-3" controlId="formBasicWeight">
             <Form.Label>weight</Form.Label>
             <Form.Control
-              onChange={e => setWeight(e.target.value)}
+              onChange={e => setWeight(numberValidation(e.target.value))}
               value={weight}
               type="num"
               placeholder="weight"
@@ -113,7 +114,7 @@ function AddProductModal({ show, setShow }) {
           <Form.Group className="mb-3" controlId="formBasicHeight">
             <Form.Label>Height</Form.Label>
             <Form.Control
-              onChange={e => setHeight(e.target.value)}
+              onChange={e => setHeight(numberValidation(e.target.value))}
               value={height}
               type="num"
               placeholder="Height"
@@ -122,7 +123,7 @@ function AddProductModal({ show, setShow }) {
           <Form.Group className="mb-3" controlId="formBasicWidth">
             <Form.Label>Width</Form.Label>
             <Form.Control
-              onChange={e => setWidth(e.target.value)}
+              onChange={e => setWidth(numberValidation(e.target.value))}
               value={width}
               type="num"
               placeholder="Width"
