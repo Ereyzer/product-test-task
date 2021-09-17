@@ -1,65 +1,121 @@
+import Dropdown from '@restart/ui/esm/Dropdown';
 import React, { useEffect, useState } from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, DropdownButton } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
-import { useLocation, useParams } from 'react-router';
+import { useHistory, useLocation } from 'react-router';
 import { productActions } from '../../Redux/products';
+import EditProductModal from '../EdipProductInfoModal/EditProductInfoModal';
+
 function Header({ addButtonClick }) {
-  const [value, setValue] = useState('');
   const location = useLocation();
+  const history = useHistory();
   const [isList, setIsList] = useState(true);
+  const [value, setValue] = useState('');
+
+  const [openEditModal, setOpenEditModal] = useState(false);
 
   const dispatch = useDispatch();
-  const handleSubmit = e => {
+  function addSortBy(e, sort) {
     e.preventDefault();
-    const sendValue = value.trim();
-
-    // onSubmit(sendValue);
-  };
-
+    if (sort === 'default') {
+      history.push({
+        ...location,
+        search: ``,
+      });
+      return;
+    }
+    history.push({
+      ...location,
+      search: `sort=${sort}`,
+    });
+  }
   useEffect(() => {
-    console.log('location-navigation', location);
-    if (location.pathname !== '/') {
+    if (location.pathname !== '/list') {
       setIsList(false);
     } else {
       setIsList(true);
     }
-    if (value.trim() === '') return;
     dispatch(productActions.filterAction(value.trim()));
   }, [value, dispatch, location]);
 
   return (
-    <header className="Searchbar">
-      {isList && (
-        <>
-          <form className="SearchForm" onSubmit={handleSubmit}>
-            <button type="submit" className="SearchForm-button">
+    <>
+      <header className="Searchbar">
+        {isList && (
+          <>
+            <form className="SearchForm">
               <span className="SearchForm-button-label">Search</span>
-            </button>
-
-            <input
-              className="SearchForm-input"
-              type="text"
-              autoComplete="off"
-              autoFocus
-              placeholder="Search product"
-              value={value}
-              onChange={e => setValue(e.target.value)}
-            />
-          </form>
+              <input
+                className="SearchForm-input"
+                type="text"
+                autoComplete="off"
+                autoFocus
+                placeholder="Search product"
+                value={value}
+                onChange={e => setValue(e.target.value)}
+              />
+            </form>
+            <DropdownButton
+              className="DropDownButton"
+              id="dropdown-basic-button"
+              title="Sort by"
+            >
+              <Dropdown.Item
+                onClick={e => addSortBy(e, 'a_z')}
+                className="DropDownButton__item"
+                href="#"
+              >
+                A-Z
+              </Dropdown.Item>
+              <Dropdown.Item
+                onClick={e => addSortBy(e, 'minmax')}
+                className="DropDownButton__item"
+                href="#"
+              >
+                From min to max
+              </Dropdown.Item>
+              <Dropdown.Item
+                onClick={e => addSortBy(e, 'maxmin')}
+                className="DropDownButton__item"
+                href="#"
+              >
+                From max to min
+              </Dropdown.Item>
+              <Dropdown.Item
+                onClick={e => addSortBy(e, 'default')}
+                className="DropDownButton__item"
+                href="#"
+              >
+                Default
+              </Dropdown.Item>
+            </DropdownButton>
+            <Button
+              as="button"
+              variant="primary"
+              type="button"
+              className="Searchbar__button-add"
+              onClick={addButtonClick}
+            >
+              Add new product
+            </Button>
+          </>
+        )}
+        {!isList && (
           <Button
             as="button"
             variant="primary"
             type="button"
-            value="Add new product"
-            type="button"
             className="Searchbar__button-add"
-            onClick={addButtonClick}
+            onClick={() => setOpenEditModal(true)}
           >
-            Add new product
+            Edit product info
           </Button>
-        </>
+        )}
+      </header>
+      {openEditModal && (
+        <EditProductModal show={openEditModal} setShow={setOpenEditModal} />
       )}
-    </header>
+    </>
   );
 }
 

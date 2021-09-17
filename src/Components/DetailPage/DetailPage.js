@@ -1,13 +1,10 @@
-import React, { Component, useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Button, Container, FloatingLabel, Form } from 'react-bootstrap';
 import { useHistory, useLocation } from 'react-router';
-import { commentOperation, commentSelectors } from '../../Redux/coments';
-import { useDispatch, useSelector } from 'react-redux';
-import { productsSelectors } from '../../Redux/products';
+import { commentOperation } from '../../Redux/coments';
+import { useDispatch } from 'react-redux';
 import CommentItem from '../CommentItem/CommentItem';
-import axios from 'axios';
-import { productOperations } from '../../Redux/products';
 
 function DetailPage({
   id,
@@ -23,13 +20,30 @@ function DetailPage({
   const history = useHistory();
   const [informer, setInformer] = useState('');
   const [comment, setComment] = useState('');
+  const dispatch = useDispatch();
 
   const onGoBack = () => history.push(`${location?.state?.from ?? '/'}`);
   // * I need fetch product by id
 
+  function addNewDate() {
+    const date = new Date();
+    return `${date.getHours()}:${
+      (date.getMinutes() + 1 < 10 ? '0' : '') + date.getMinutes()
+    } ${date.getDate()}.${
+      (date.getMinutes() + 1 + 1 < 10 ? '0' : '') + date.getMinutes() + 1
+    }.${date.getFullYear()}`;
+  }
   function onSubmit(e) {
     e.preventDefault();
-    console.log(informer, comment);
+
+    dispatch(
+      commentOperation.addComments({
+        name: informer,
+        description: comment,
+        productId: id,
+        date: addNewDate(),
+      }),
+    );
     setInformer('');
     setComment('');
   }

@@ -1,20 +1,39 @@
 import Button from '@restart/ui/esm/Button';
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { Form, Modal, FloatingLabel } from 'react-bootstrap';
 import { createPortal } from 'react-dom';
-import { useDispatch } from 'react-redux';
-import { toast } from 'react-toastify';
-import { addNewProduct } from '../../Redux/products/products.operation';
+import { useDispatch, useSelector } from 'react-redux';
+import { productsSelectors } from '../../Redux/products';
 
-function AddProductModal({ show, setShow }) {
-  const [name, setName] = useState('');
-  const [width, setWidth] = useState('');
-  const [height, setHeight] = useState('');
-  const [imageUrl, setImageUrl] = useState('');
-  const [count, setCount] = useState('');
-  const [weight, setWeight] = useState('');
-  const [description, setDescription] = useState();
+import { toast } from 'react-toastify';
+import { editProductParams } from '../../Redux/products/products.operation';
+import { useLocation } from 'react-router';
+function EditProductModal({ show, setShow }) {
+  const location = useLocation();
+
+  const productsArray = useSelector(productsSelectors.getProductList);
+  const id = useRef(getCurrentElement().id);
+  const [name, setName] = useState(() => getCurrentElement().name);
+  const [width, setWidth] = useState(() =>
+    getCurrentElement().size.width.toString(),
+  );
+  const [height, setHeight] = useState(() =>
+    getCurrentElement().size.height.toString(),
+  );
+  const [imageUrl, setImageUrl] = useState(() => getCurrentElement().imageUrl);
+  const [count, setCount] = useState(() =>
+    getCurrentElement().count.toString(),
+  );
+  const [weight, setWeight] = useState(() =>
+    getCurrentElement().weight.toString(),
+  );
+  const [description, setDescription] = useState(
+    () => getCurrentElement().description,
+  );
   const dispatch = useDispatch();
+  function getCurrentElement() {
+    return productsArray[Number(location.pathname.slice(6))];
+  }
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -31,7 +50,8 @@ function AddProductModal({ show, setShow }) {
       return;
     }
     dispatch(
-      addNewProduct({
+      editProductParams({
+        id: id.current,
         name,
         size: { width: Number(width), height: Number(height) },
         imageUrl,
@@ -69,7 +89,7 @@ function AddProductModal({ show, setShow }) {
     >
       <Modal.Header closeButton>
         <Modal.Title id="example-custom-modal-styling-title">
-          Please add new product or close it
+          Edit some value
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
@@ -138,7 +158,7 @@ function AddProductModal({ show, setShow }) {
             />
           </FloatingLabel>
           <Button variant="primary" type="submit">
-            Add element
+            Edit element
           </Button>
         </Form>
       </Modal.Body>
@@ -151,4 +171,4 @@ function AddProductModal({ show, setShow }) {
   );
 }
 
-export default AddProductModal;
+export default EditProductModal;

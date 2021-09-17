@@ -6,14 +6,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { areYouSureActionClose } from '../../Redux/helpers/helpers-actions';
 import { getDelElement } from '../../Redux/helpers/helpers-selectors';
 import { productOperations } from '../../Redux/products';
-import { useLocation, useParams } from 'react-router';
+import { useLocation } from 'react-router';
 import { commentOperation } from '../../Redux/coments';
 
 function DeleteModal({ showModal }) {
   const { pathname } = useLocation();
 
   const delElement = useSelector(getDelElement);
-  console.log('delElement', delElement);
   const dispatch = useDispatch();
   function onDelete() {
     if (pathname.includes('/info/')) {
@@ -23,6 +22,7 @@ function DeleteModal({ showModal }) {
           productCommentId: delElement.productCommitId,
         }),
       );
+      dispatch(areYouSureActionClose());
       return;
     }
     dispatch(productOperations.deleteProduct(delElement.id));

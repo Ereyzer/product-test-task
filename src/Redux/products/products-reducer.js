@@ -1,4 +1,4 @@
-import { createAction, createReducer } from '@reduxjs/toolkit';
+import { createReducer } from '@reduxjs/toolkit';
 import { combineReducers } from 'redux';
 import { commentOperation } from '../coments';
 import initialState from '../initialState';
@@ -8,6 +8,7 @@ import {
   addNewProduct,
   deleteProduct,
   fetchProductById,
+  editProductParams,
 } from './products.operation';
 
 const items = createReducer(initialState.products.items, {
@@ -16,19 +17,33 @@ const items = createReducer(initialState.products.items, {
       (acc, product) => (acc = { ...acc, [product.id]: product }),
       {},
     );
-    console.log('console.log(allProducts)', allProducts);
     return { ...state, ...allProducts };
   },
   [fetchProductById.fulfilled]: (state, { payload }) => ({
     ...state,
     [payload.id]: payload,
   }),
-  [addNewProduct.fulfilled]: (state, { payload }) => [...state, payload],
+  [addNewProduct.fulfilled]: (state, { payload }) => ({
+    ...state,
+    [payload.id]: payload,
+  }),
   [deleteProduct.fulfilled]: (state, { payload }) => [
     ...state.filter(product => product.id !== payload),
   ],
+  [editProductParams.fulfilled]: (state, { payload }) => ({
+    ...state,
+    [payload.id]: payload,
+  }),
+  [commentOperation.addComments.fulfilled]: (state, { payload }) => {
+    return {
+      ...state,
+      [payload.productId]: {
+        ...state[payload.productId],
+        comments: [...state[payload.productId].comments, payload],
+      },
+    };
+  },
   [commentOperation.deleteComment.fulfilled]: (state, { payload }) => {
-    console.log(state[payload.productCommentId]);
     return {
       ...state,
       [payload.productCommentId]: {

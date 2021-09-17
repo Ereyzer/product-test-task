@@ -1,15 +1,13 @@
-import * as actions from './products-actions';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 axios.defaults.baseURL = 'http://localhost:4040';
 
 export const fetchProducts = createAsyncThunk(
-  [actions.fetchProducts],
+  ['products/fetch'],
   async (_, { rejectWithValue }) => {
     try {
       const result = await axios.get('/products?_embed=comments');
 
-      console.log('result', result);
       return result.data;
     } catch (error) {
       return rejectWithValue(`${error.message}`);
@@ -29,11 +27,10 @@ export const fetchProductById = createAsyncThunk(
   },
 );
 export const addNewProduct = createAsyncThunk(
-  [actions.addProduct],
+  ['products/add'],
   async (data, { rejectWithValue }) => {
     try {
       const result = await axios.post('/products', data);
-      console.log(result);
       return result.data;
     } catch (error) {
       return rejectWithValue(
@@ -43,8 +40,22 @@ export const addNewProduct = createAsyncThunk(
   },
 );
 
+export const editProductParams = createAsyncThunk(
+  ['products/edit'],
+  async (data, { rejectWithValue }) => {
+    try {
+      const result = await axios.put(`/products/${data.id}`, data);
+      return result.data;
+    } catch (error) {
+      return rejectWithValue(
+        `${error.message}-- we can not delete this product please reload this page and try again`,
+      );
+    }
+  },
+);
+
 export const deleteProduct = createAsyncThunk(
-  [actions.deleteProduct],
+  ['products/delete'],
   async (id, { rejectWithValue }) => {
     try {
       const result = await axios.delete(`/products/${id}`);

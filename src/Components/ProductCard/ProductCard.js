@@ -1,10 +1,8 @@
-import React, { useRef, useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Card, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { productActions } from '../../Redux/products';
 import { useDispatch } from 'react-redux';
-import { productOperations } from '../../Redux/products';
 import { areYouSureActionOpen } from '../../Redux/helpers/helpers-actions';
 
 function ProductCard({ image, name, count, id, description }) {
@@ -12,7 +10,6 @@ function ProductCard({ image, name, count, id, description }) {
 
   function deleteClick(id) {
     dispatch(areYouSureActionOpen({ id, name }));
-    // dispatch(productOperations.deleteProduct(id));
   }
   return (
     <Card as="li" style={{ width: '18rem' }}>

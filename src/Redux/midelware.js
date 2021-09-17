@@ -8,7 +8,7 @@ import {
 } from 'redux-persist';
 
 export const middleware = getDefaultMiddleware => {
-  if (process.env.NODE_ENV === `development`) {
+  if (process.env.NODE_ENV === `product`) {
     const { logger } = require(`redux-logger`);
 
     return [

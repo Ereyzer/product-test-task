@@ -5,7 +5,7 @@ import productsReducer from './products-reducer';
 const productsPersistConfig = {
   key: 'products',
   storage,
-  blacklist: ['items'],
+  blacklist: ['items', 'filter'],
 };
 
 const productsPersistor = persistReducer(

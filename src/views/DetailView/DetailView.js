@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import DetailPage from '../../Components/DetailPage/DetailPage';
@@ -9,7 +9,6 @@ function DetailView() {
   const { productId } = useParams();
   const dispatch = useDispatch();
   const productsArray = useSelector(productsSelectors.getProductList);
-  console.log('productsArray  DetailView', productsArray[productId]);
   useEffect(() => {
     dispatch(productOperations.fetchProductById(productId));
   }, [productId, dispatch]);

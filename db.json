@@ -10,11 +10,7 @@
         "height": 320
       },
       "weight": 550,
-      "description": "some about this product",
-      "comments": [
-        5,
-        6
-      ]
+      "description": "some about this product"
     },
     {
       "name": "cucumber",
@@ -27,38 +23,140 @@
       "weight": 2000,
       "description": "Delicious",
       "id": 5
-    }
-  ],
-  "Comments": [
-    {
-      "id": 1,
-      "name": "jhon",
-      "comment": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Illum aliquam assumenda aspernatur nihil dolorem. Voluptatibus recusandae amet quae quaerat facere? Soluta, eaque hic? Error, quos nostrum ratione numquam doloremque voluptatem?"
-    },
-    {
-      "id": 2,
-      "name": "Jhon",
-      "comment": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Illum aliquam assumenda aspernatur nihil dolorem. Voluptatibus recusandae amet quae quaerat facere? Soluta, eaque hic? Error, quos nostrum ratione numquam doloremque voluptatem?"
-    },
-    {
-      "id": 3,
-      "name": "Jonatan",
-      "comment": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Illum aliquam assumenda aspernatur nihil dolorem. Voluptatibus recusandae amet quae quaerat facere? Soluta, eaque hic? Error, quos nostrum ratione numquam doloremque voluptatem?"
-    },
-    {
-      "id": 4,
-      "name": "Romko",
-      "comment": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Illum aliquam assumenda aspernatur nihil dolorem. Voluptatibus recusandae amet quae quaerat facere? Soluta, eaque hic? Error, quos nostrum ratione numquam doloremque voluptatem?"
-    },
-    {
-      "id": 5,
-      "name": "batman",
-      "comment": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Illum aliquam assumenda aspernatur nihil dolorem. Voluptatibus recusandae amet quae quaerat facere? Soluta, eaque hic? Error, quos nostrum ratione numquam doloremque voluptatem?"
     },
     {
       "id": 6,
+      "name": "tomato",
+      "size": {
+        "width": 70,
+        "height": 40
+      },
+      "imageUrl": "https://cdn.pixabay.com/photo/2011/03/16/16/01/tomatoes-5356_960_720.jpg",
+      "count": 1000,
+      "weight": 1000,
+      "description": "Delicious red tomato"
+    },
+    {
+      "id": 7,
+      "name": "watermelon",
+      "size": {
+        "width": 500,
+        "height": 900
+      },
+      "imageUrl": "https://media.istockphoto.com/photos/summer-fruit-green-watermelon-picture-id649824716?s=612x612",
+      "count": 120,
+      "weight": 120,
+      "description": "Very big watermelon"
+    },
+    {
+      "name": "apple",
+      "size": {
+        "width": null,
+        "height": 64
+      },
+      "imageUrl": "https://media.istockphoto.com/photos/red-apple-picture-id184276818?s=612x612",
+      "count": 122,
+      "weight": 122,
+      "description": "adsfdgfgui/.,ytrtnbvcasCC GRNGABF das",
+      "id": 8
+    },
+    {
+      "name": "avocado",
+      "size": {
+        "width": 366,
+        "height": 34
+      },
+      "imageUrl": "https://media.istockphoto.com/photos/avocado-on-old-wooden-table-in-bowl-picture-id1210634323?s=612x612",
+      "count": 56,
+      "weight": 56,
+      "description": "fbghjkoip;o.  ",
+      "id": 9
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "productId": 5,
+      "name": "serhio",
+      "description": "some text here",
+      "date": "14:00 22.08.2021"
+    },
+    {
+      "id": 2,
+      "productId": 5,
+      "name": "Jonatan",
+      "description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Illum aliquam assumenda aspernatur nihil dolorem. Voluptatibus recusandae amet quae quaerat facere? Soluta, eaque hic? Error, quos nostrum ratione numquam doloremque voluptatem?",
+      "date": "14:00 22.08.2021"
+    },
+    {
+      "id": 3,
+      "productId": 3,
+      "name": "Romko",
+      "description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Illum aliquam assumenda aspernatur nihil dolorem. Voluptatibus recusandae amet quae quaerat facere? Soluta, eaque hic? Error, quos nostrum ratione numquam doloremque voluptatem?",
+      "date": "14:00 22.08.2021"
+    },
+    {
+      "id": 4,
+      "productId": 3,
+      "name": "batman",
+      "description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Illum aliquam assumenda aspernatur nihil dolorem. Voluptatibus recusandae amet quae quaerat facere? Soluta, eaque hic? Error, quos nostrum ratione numquam doloremque voluptatem?",
+      "date": "14:00 22.08.2021"
+    },
+    {
+      "id": 5,
+      "productId": 3,
       "name": "eleonora",
-      "comment": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Illum aliquam assumenda aspernatur nihil dolorem. Voluptatibus recusandae amet quae quaerat facere? Soluta, eaque hic? Error, quos nostrum ratione numquam doloremque voluptatem?"
+      "description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Illum aliquam assumenda aspernatur nihil dolorem. Voluptatibus recusandae amet quae quaerat facere? Soluta, eaque hic? Error, quos nostrum ratione numquam doloremque voluptatem?",
+      "date": "14:00 22.08.2021"
+    },
+    {
+      "name": "ivan",
+      "description": "I can Do it",
+      "productId": 3,
+      "date": "1:56 17.561.2021",
+      "id": 6
+    },
+    {
+      "name": "chaki",
+      "description": "I am best",
+      "productId": 3,
+      "date": "1:56 17.561.2021",
+      "id": 7
+    },
+    {
+      "name": "Fozi",
+      "description": "I can sing song",
+      "productId": 5,
+      "date": "1:56 17.561.2021",
+      "id": 8
+    },
+    {
+      "name": "aaa",
+      "description": "ooooooooooooooooooooooooooooooooooooooooooo",
+      "productId": 5,
+      "date": "1:56 17.561.2021",
+      "id": 9
+    },
+    {
+      "name": "time man",
+      "description": "i can add normal time",
+      "productId": 5,
+      "date": "1:56 17.561.2021",
+      "id": 10
+    },
+    {
+      "name": "chaki",
+      "description": "I think it is delicious",
+      "productId": 7,
+      "date": "2:38 17.381.2021",
+      "id": 11
+    },
+    {
+      "name": "doctor",
+      "description": "Avocado is healthy",
+      "productId": 9,
+      "date": "5:02 17.021.2021",
+      "id": 12
     }
   ]
 }

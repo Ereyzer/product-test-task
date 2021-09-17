@@ -1,24 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Button } from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { areYouSureActionOpen } from '../../Redux/helpers/helpers-actions';
 
-function CommentItem({ name, id, description, productCommitId }) {
+function CommentItem({ name, id, description, productCommitId, date }) {
   const dispatch = useDispatch();
   const handleClick = e => {
     dispatch(areYouSureActionOpen({ id, name, productCommitId }));
   };
-  console.log('{ name, id, description, productCommitId }', {
-    name,
-    id,
-    description,
-    productCommitId,
-  });
+
   return (
     <li key={id}>
       <h4>{name}</h4>
       <p>{description}</p>
+      <time>{date}</time>
       <Button variant="secondary" onClick={handleClick}>
         delete
       </Button>
@@ -30,6 +26,7 @@ CommentItem.propTypes = {
   name: PropTypes.string.isRequired,
   id: PropTypes.number.isRequired,
   description: PropTypes.string.isRequired,
+  date: PropTypes.string.isRequired,
 };
 
 export default CommentItem;

@@ -1,12 +1,5 @@
 import React, { Suspense, useState } from 'react';
-import {
-  Switch,
-  useHistory,
-  useLocation,
-  Redirect,
-  Route,
-  Link,
-} from 'react-router-dom';
+import { Switch, Redirect, Route } from 'react-router-dom';
 import './App.scss';
 import { ToastContainer } from 'react-toastify';
 import DeleteModal from './DeleteModal/DeleteModal';
@@ -15,7 +8,7 @@ import { isOpenAskModal } from '../Redux/helpers/helpers-selectors';
 import AddProductModal from './AddProductModal/AddProductModal';
 import { useSelector } from 'react-redux';
 import { Spinner } from 'react-bootstrap';
-// import AddProductModal from './AddProductModal/AddProductModal.js';
+
 const Header = React.lazy(() => import('./Header/Header.js'));
 
 const DetailView = React.lazy(() =>
@@ -29,10 +22,8 @@ function App() {
 
   //* opened modal and ask delete or no
   const isOpenASkModalOrNo = useSelector(isOpenAskModal);
-  console.log(isOpenASkModalOrNo);
 
   function addButtonClick(e) {
-    console.log('click');
     setIsOpenModal(true);
   }
   return (
@@ -48,13 +39,13 @@ function App() {
       >
         <Header addButtonClick={addButtonClick} />
         <Switch>
-          <Route path="/" exact>
+          <Route path="/list" exact>
             <ListView />
           </Route>
           <Route path="/info/:productId">
             <DetailView />
           </Route>
-          <Redirect strict from="/:spoiledLink" to="/" />
+          <Redirect strict from="/" to="/list" />
         </Switch>
       </Suspense>
       <AddProductModal setShow={setIsOpenModal} show={isOpenModal} />
