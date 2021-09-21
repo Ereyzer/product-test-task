@@ -27,9 +27,23 @@ const items = createReducer(initialState.products.items, {
     ...state,
     [payload.id]: payload,
   }),
-  [deleteProduct.fulfilled]: (state, { payload }) => [
-    ...state.filter(product => product.id !== payload),
-  ],
+  [deleteProduct.fulfilled]: (state, { payload }) => {
+    const oldKeys = Object.keys(state);
+
+    const newKeys = oldKeys.filter(product => Number(product) !== payload);
+
+    const newState = newKeys.reduce((acc, key) => {
+      if (Number(key) !== payload) return { ...acc, [key]: state[key] };
+      return acc;
+    }, {});
+
+    return { ...newState };
+  },
+  //
+  // const { [payload]: deleteItem, ...newState } = state;
+  //   return [
+  //   ...state.filter(product => product.id !== payload),
+  // ]},
   [editProductParams.fulfilled]: (state, { payload }) => ({
     ...state,
     [payload.id]: payload,

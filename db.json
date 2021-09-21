@@ -28,8 +28,8 @@
       "id": 6,
       "name": "tomato",
       "size": {
-        "width": 70,
-        "height": 40
+        "width": "70",
+        "height": 400
       },
       "imageUrl": "https://cdn.pixabay.com/photo/2011/03/16/16/01/tomatoes-5356_960_720.jpg",
       "count": 1000,
@@ -71,6 +71,42 @@
       "weight": 56,
       "description": "fbghjkoip;o.  ",
       "id": 9
+    },
+    {
+      "name": "mango",
+      "size": {
+        "width": 40,
+        "height": 50
+      },
+      "imageUrl": "https://media.istockphoto.com/photos/mango-picture-id168370138",
+      "count": 100,
+      "weight": 100,
+      "description": "pkojhligujfhtdr",
+      "id": 10
+    },
+    {
+      "name": "banana",
+      "size": {
+        "width": 100,
+        "height": 45
+      },
+      "imageUrl": "https://media.istockphoto.com/photos/banana-picture-id157375066?s=612x612",
+      "count": 10444,
+      "weight": 56,
+      "description": "fghjkl",
+      "id": 11
+    },
+    {
+      "name": "Meat",
+      "size": {
+        "width": 1111,
+        "height": 2
+      },
+      "imageUrl": "https://media.istockphoto.com/photos/variety-of-raw-black-angus-prime-meat-steaks-picture-id923692030?s=612x612",
+      "count": 3,
+      "weight": 3,
+      "description": "hjekwlq;r58348fcos",
+      "id": 12
     }
   ],
   "comments": [
@@ -85,13 +121,6 @@
       "id": 2,
       "productId": 5,
       "name": "Jonatan",
-      "description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Illum aliquam assumenda aspernatur nihil dolorem. Voluptatibus recusandae amet quae quaerat facere? Soluta, eaque hic? Error, quos nostrum ratione numquam doloremque voluptatem?",
-      "date": "14:00 22.08.2021"
-    },
-    {
-      "id": 3,
-      "productId": 3,
-      "name": "Romko",
       "description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Illum aliquam assumenda aspernatur nihil dolorem. Voluptatibus recusandae amet quae quaerat facere? Soluta, eaque hic? Error, quos nostrum ratione numquam doloremque voluptatem?",
       "date": "14:00 22.08.2021"
     },
